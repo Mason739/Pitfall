@@ -112,6 +112,25 @@ let camera = {
     this.setFill('#089819');
     this.drawBox(10, 10, 50, 50);
 
+    // Light green background
+    this.setFill(colors.forest_background);
+    this.drawBox(0, 0, game.canvas.element.width, game.canvas.element.height /2 );
+
+    // Black background
+    this.setFill('#000000');
+    this.drawBox(0, game.canvas.element.height /2, game.canvas.element.width, game.canvas.element.height /2 )
+
+    // Path
+    this.setFill(colors.path);
+    this.drawBox(0, game.canvas.element.height /2, game.canvas.element.width, game.canvas.element.height / 8);
+
+    // Darker under path
+    this.setFill(colors.under_path);
+    this.drawBox(0, game.canvas.element.height / 2 +  game.canvas.element.height / 8, game.canvas.element.width, game.canvas.element.height / 8 - 3);
+
+    // Lower path
+    this.setFill(colors.under_path);
+    this.drawBox(0, game.canvas.element.height * (13 / 15), game.canvas.element.width, game.canvas.element.height * (1 / 30));
 
     // If the game is paused, draw a 'misty' effect over the screen
     // TODO: Paused world be ligher or darker?

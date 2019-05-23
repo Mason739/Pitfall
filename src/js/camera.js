@@ -132,6 +132,9 @@ let camera = {
     this.setFill(colors.under_path);
     this.drawBox(0, game.canvas.element.height * (13 / 15), game.canvas.element.width, game.canvas.element.height * (1 / 30));
 
+    // Draw the trees
+    this.drawTrees(clock.now());
+
     // If the game is paused, draw a 'misty' effect over the screen
     // TODO: Paused world be ligher or darker?
     if(!game.running) {
@@ -1123,6 +1126,19 @@ let camera = {
     }
 
     return final;
+  },
+
+
+
+  /**
+   * Draws the trees on the top of the game with the given offset
+   * @param  {Number} offset the amount to offset the drawing of the trees
+   * @return {undefined}        no return value
+   */
+  drawTrees: function(offset) {
+    offset = offset % game.canvas.element.width;
+    this.drawImage(assets.images.trees, -1 * offset, 0, game.canvas.element.width, game.canvas.element.height * (86 / 300));
+    this.drawImage(assets.images.trees, -1 * offset + game.canvas.element.width, 0, game.canvas.element.width, game.canvas.element.height * (86 / 300));
   },
 
 

@@ -118,6 +118,10 @@ game = {
 
 };
 
+window.onload = function() {
+  assetManager.downloadImages();
+}
+
 
 
 

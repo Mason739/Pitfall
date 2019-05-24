@@ -9,6 +9,7 @@ let assetManager = {
   weaponsLoaded: 0,
   imageSources: {
     'trees': '/assets/trees.png',
+    'trunk': '/assets/treetrunk.png',
 
   },
 

@@ -132,8 +132,18 @@ let camera = {
     this.setFill(colors.under_path);
     this.drawBox(0, game.canvas.element.height * (13 / 15), game.canvas.element.width, game.canvas.element.height * (1 / 30));
 
+    this.drawTrunk(10);
+    this.drawTrunk(235);
+    this.drawTrunk(500);
+    this.drawTrunk(345);
+
     // Draw the trees
-    this.drawTrees(clock.now());
+    this.drawTrees(10);
+
+
+    // Draw the ladder
+    this.drawLadder(250);
+
 
     // If the game is paused, draw a 'misty' effect over the screen
     // TODO: Paused world be ligher or darker?
@@ -1140,6 +1150,30 @@ let camera = {
     this.drawImage(assets.images.trees, -1 * offset, 0, game.canvas.element.width, game.canvas.element.height * (86 / 300));
     this.drawImage(assets.images.trees, -1 * offset + game.canvas.element.width, 0, game.canvas.element.width, game.canvas.element.height * (86 / 300));
   },
+
+  /**
+   * Draw the trunk of a tree
+   * @param  {Number} location place to draw the tree trunk
+   * @return {undefined}        no return value
+   */
+  drawTrunk: function(location) {
+    const moveDown = 150;
+    this.drawImage(assets.images.trunk, location,  moveDown, 150, game.canvas.element.height / 2 - moveDown)
+  },
+
+  /**
+   * Draws a ladder and hole to access the underground
+   */
+  drawLadder: function(location) {
+    const BOX_WIDTH = 60;
+    const BOX_HEIGHT = 40;
+
+    this.setFill('#000000');
+    this.drawBox(location - (BOX_WIDTH/2), game.canvas.element.height / 2 + 30, BOX_WIDTH, BOX_HEIGHT)
+
+    // TODO: FIX THIS
+    this.drawBox(location - (BOX_WIDTH / 2), game.canvas.element.height / 2, BOX_WIDTH, game.cavas.element.height/ 2);
+  }
 
 
 

@@ -10,6 +10,7 @@ let assetManager = {
   imageSources: {
     'trees': '/assets/trees.png',
     'trunk': '/assets/treetrunk.png',
+    'brick': '/assets/bricks.png',
 
   },
 

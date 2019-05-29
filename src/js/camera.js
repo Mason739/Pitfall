@@ -126,7 +126,7 @@ let camera = {
 
     // Darker under path
     this.setFill(colors.under_path);
-    this.drawBox(0, game.canvas.element.height / 2 +  game.canvas.element.height / 8, game.canvas.element.width, game.canvas.element.height / 8 - 3);
+    this.drawBox(0, game.canvas.element.height / 2 +  game.canvas.element.height / 8, game.canvas.element.width, game.canvas.element.height / 12 - 3);
 
     // Lower path
     this.setFill(colors.under_path);
@@ -143,6 +143,8 @@ let camera = {
 
     // Draw the ladder
     this.drawLadder(250);
+
+    this.drawBricks(800);
 
 
     // If the game is paused, draw a 'misty' effect over the screen
@@ -1165,14 +1167,33 @@ let camera = {
    * Draws a ladder and hole to access the underground
    */
   drawLadder: function(location) {
+    this.setStroke("rgba(1, 1, 1, 0)");
     const BOX_WIDTH = 60;
     const BOX_HEIGHT = 40;
 
     this.setFill('#000000');
     this.drawBox(location - (BOX_WIDTH/2), game.canvas.element.height / 2 + 30, BOX_WIDTH, BOX_HEIGHT)
 
-    // TODO: FIX THIS
-    this.drawBox(location - (BOX_WIDTH / 2), game.canvas.element.height / 2, BOX_WIDTH, game.cavas.element.height/ 2);
+    this.drawBox(location - (BOX_WIDTH / 2), game.canvas.element.height / 2 +  game.canvas.element.height / 8, BOX_WIDTH, game.canvas.element.height / 8 );
+
+    this.setFill(colors.under_path);
+    for(var i = game.canvas.element.height / 2 +  game.canvas.element.height / 8 + 10; i < game.canvas.element.height * (13 / 15); i += 20) {
+      this.drawBox(location - (BOX_WIDTH / 2) + BOX_WIDTH / 4, i, BOX_WIDTH / 2, 7);
+    }
+
+
+
+  },
+
+  /**
+  * Draws a wall of bricks on the screen
+  */
+  drawBricks: function(location) {
+    // this.drawBox(0, game.canvas.element.height / 2 +  game.canvas.element.height / 8, game.canvas.element.width, game.canvas.element.height / 12 - 3);
+    // this.drawBox(0, game.canvas.element.height * (13 / 15), game.canvas.element.width, game.canvas.element.height * (1 / 30));
+    game.canvas.ctx.imageSmoothingEnabled= false;
+
+    this.drawImage(assets.images.brick, location, (game.canvas.element.height / 2 +  game.canvas.element.height / 8) + (game.canvas.element.height / 12 - 3), 60,  Math.abs(((game.canvas.element.height / 2 +  game.canvas.element.height / 8) + (game.canvas.element.height / 12 - 3)) - (game.canvas.element.height * (13 / 15))));
   }
 
 

@@ -146,6 +146,8 @@ let camera = {
 
     this.drawBricks(800);
 
+    this.drawPlayer();
+
 
     // If the game is paused, draw a 'misty' effect over the screen
     // TODO: Paused world be ligher or darker?
@@ -1169,7 +1171,7 @@ let camera = {
   drawLadder: function(location) {
     this.setStroke("rgba(1, 1, 1, 0)");
     const BOX_WIDTH = 60;
-    const BOX_HEIGHT = 40;
+    const BOX_HEIGHT = 30;
 
     this.setFill('#000000');
     this.drawBox(location - (BOX_WIDTH/2), game.canvas.element.height / 2 + 30, BOX_WIDTH, BOX_HEIGHT)
@@ -1194,6 +1196,11 @@ let camera = {
     game.canvas.ctx.imageSmoothingEnabled= false;
 
     this.drawImage(assets.images.brick, location, (game.canvas.element.height / 2 +  game.canvas.element.height / 8) + (game.canvas.element.height / 12 - 3), 60,  Math.abs(((game.canvas.element.height / 2 +  game.canvas.element.height / 8) + (game.canvas.element.height / 12 - 3)) - (game.canvas.element.height * (13 / 15))));
+  },
+
+  drawPlayer: function() {
+    this.setFill("#f58f79");
+    this.drawBox(player.x, player.y + game.canvas.element.height/2 - 10 , 10, 100);
   }
 
 

@@ -10,7 +10,9 @@ let controls = {
    * @type {Object}
    */
   bindings: {
-
+    "MOVE_RIGHT": [39],  // right arrow
+    "MOVE_LEFT": [37], // left arrow
+    "BUTTON": [32], // Space bar
   },
 
   /**

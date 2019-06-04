@@ -94,6 +94,7 @@ game = {
 
     if(this.running) {
       // Game step code
+      player.move();
     }
 
   },

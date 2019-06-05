@@ -95,7 +95,6 @@ let camera = {
    * @return {undefined} no return value
    */
   draw: function() {
-    console.log("here");
 
     if(!game.started) {
       return;
@@ -1200,7 +1199,7 @@ let camera = {
 
   drawPlayer: function() {
     this.setFill("#f58f79");
-    this.drawBox(player.x, player.y + game.canvas.element.height/2 - 10 , 10, 100);
+    this.drawBox(player.x, player.y + game.canvas.element.height/2 - 32 , 10, 100);
   }
 
 

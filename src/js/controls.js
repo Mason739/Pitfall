@@ -13,6 +13,7 @@ let controls = {
     "MOVE_RIGHT": [39],  // right arrow
     "MOVE_LEFT": [37], // left arrow
     "BUTTON": [32], // Space bar
+    "UP": [38], // up arrow
   },
 
   /**

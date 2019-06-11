@@ -22,6 +22,8 @@ let player = {
 
   groundLevel: 0,
 
+  ladder: false,
+
   /**
    * Is the player inside a jump (because they can't move when inside a jump)
    * @type {Boolean}
@@ -53,21 +55,42 @@ let player = {
       this.inJump = true;
       this.velocity += 10;
     }
-    this.y -= this.velocity;
+
+    if(!this.ladder) {
+      this.y -= this.velocity;
+
+    }
 
     // TODO: This should be if(player.isTouchingGround)
     if (this.y < this.groundLevel) {
       this.velocity -= 0.5;
-    } else if (this.inJump){
+    } else {
       this.velocity = 0;
       this.inJump = false;
     }
 
     // TODO: This should be if (player.isTouchingHole)
-    if (this.x > 210 && this.x < 270 && this.y < 100) {
+    if (this.x > 210 && this.x < 270 && this.y < 10 && !this.ladder && !this.inJump) {
       this.inJump = true;
       this.groundLevel = 163;
       this.jumpXvelocity = 0;
+    }
+
+    console.log(this.y);
+
+    if (this.x > 210 && this.x < 270 && controls.isControlPressed("UP")) {
+      this.ladder = true;
+      this.y -= 10;
+      this.velocity = 0;
+      console.log("Ladder up");
+    }
+
+    if (this.ladder && this.y < 0) {
+      this.velocity = -10;
+      this.groundLevel = 0;
+      this.inJump = true;
+      this.jumpXvelocity = 10;
+      this.ladder = false;
     }
 
 

@@ -76,7 +76,7 @@ let player = {
       this.jumpXvelocity = 0;
     }
 
-    console.log(this.y);
+    // console.log(this.x);
 
     if (this.x > 210 && this.x < 270 && controls.isControlPressed("UP")) {
       this.ladder = true;
@@ -91,6 +91,10 @@ let player = {
       this.inJump = true;
       this.jumpXvelocity = 10;
       this.ladder = false;
+    }
+
+    if (this.x > 700 && this.y > 30) {
+      this.x = 700;
     }
 
 

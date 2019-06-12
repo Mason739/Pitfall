@@ -143,7 +143,9 @@ let camera = {
     // Draw the ladder
     this.drawLadder(250);
 
-    this.drawBricks(800);
+    this.drawBricks(695);
+
+    this.drawLog(600);
 
     this.drawPlayer();
 
@@ -1199,8 +1201,44 @@ let camera = {
 
   drawPlayer: function() {
     this.setFill("#f58f79");
-    this.drawBox(player.x, player.y + game.canvas.element.height/2 - 32 , 10, 100);
-  }
+    // this.drawBox(player.x, player.y + game.canvas.element.height/2 - 32 , 10, 100);
+
+    var time  = clock.now() % 500;
+    var img = null;
+    if(time < 100) {
+      img = assets.images.runa;
+      // console.log();
+    } else if (time < 200) {
+      img = assets.images.runb;
+      // console.log('b');
+    } else if (time < 300) {
+      img = assets.images.runc;
+      // console.log('c');
+
+    } else if (time < 400) {
+      img = assets.images.rund;
+      // console.log('d');
+
+    } else {
+      img = assets.images.rune;
+      // console.log('e');
+
+    }
+
+    console.log(img);
+
+
+
+
+
+    this.drawImage(img, player.x, player.y + game.canvas.element.height/2 - 32 , 60, 100);
+
+  },
+
+  drawLog: function(location) {
+    this.drawImage(assets.images.log, location, 350, 50, 50);
+
+  },
 
 
 

@@ -30,6 +30,12 @@ let player = {
   score: 2000,
 
   /**
+   * Stores which screen the player is on.
+   * @type {Number}
+   */
+  screen: 2,
+
+  /**
    * Is the player inside a jump (because they can't move when inside a jump)
    * @type {Boolean}
    */
@@ -40,6 +46,7 @@ let player = {
    * @return {undefined} no return value
    */
   move: function() {
+
 
     if (!this.inJump) {
       if (controls.isControlPressed('MOVE_RIGHT')) {
@@ -74,22 +81,8 @@ let player = {
       this.inJump = false;
     }
 
-    // TODO: This should be if (player.isTouchingHole)
-    if (this.x > 210 && this.x < 270 && this.y < 10 && !this.ladder && !this.inJump) {
-      this.inJump = true;
-      this.groundLevel = 163;
-      this.jumpXvelocity = 0;
-    }
 
-    // console.log(this.x);
-
-    if (this.x > 210 && this.x < 270 && controls.isControlPressed("UP")) {
-      this.ladder = true;
-      this.y -= 10;
-      this.velocity = 0;
-      console.log("Ladder up");
-    }
-
+    // Finish climbing ladder?
     if (this.ladder && this.y < 0) {
       this.velocity = -10;
       this.groundLevel = 0;
@@ -98,18 +91,100 @@ let player = {
       this.ladder = false;
     }
 
-    if (this.x > 700 && this.y > 30) {
-      this.x = 700;
+
+    // Don't fall through the ground
+    if (!this.inJump && this.y > this.groundLevel) {
+      this.y = this.groundLevel + 1;
     }
 
-    if (this.x > 565 && this.x < 615 && this.y > -10) {
-      this.score -= 1;
-      this.log = true;
-    } else {
-      this.log = false;
+    // Move to new screens
+    if (this.x > 820) {
+      this.screen++;
+      this.x = 20;
+    } else if (this.x < 0) {
+      this.screen--;
+      this.x = 780;
     }
 
 
+    //===========================================
+    //    SCREEN SPECIFIC STUFF STARTS HERE
+    //===========================================
+
+    if (this.screen == 1) {
+
+      // Brick wall
+      if (this.x > 700 && this.y > 30) {
+        this.x = 700;
+      }
+
+      // TODO: This should be if (player.isTouchingHole)
+      // Fall through pit
+      if (this.x > 210 && this.x < 270 && this.y < 10 && !this.ladder && !this.inJump) {
+        this.inJump = true;
+        this.groundLevel = 163;
+        this.jumpXvelocity = 0;
+      }
+
+
+      // Take damage if on log
+      if (this.x > 565 && this.x < 615 && this.y > -10) {
+        this.score -= 1;
+        this.log = true;
+      } else {
+        this.log = false;
+      }
+
+      // Climb ladder
+      if (this.x > 210 && this.x < 270 && controls.isControlPressed("UP")) {
+        this.ladder = true;
+        this.y -= 10;
+        this.velocity = 0;
+        console.log("Ladder up");
+      }
+
+
+    } else if (this.screen == 2) {
+      // Brick wall
+      if (this.x > 700 && this.y > 30) {
+        this.x = 700;
+      }
+
+      // FALLING IN PITS
+      // Pit #1 (left to right)
+      if (this.x > 125 && this.x < 185 && this.y < 10 && !this.ladder && !this.inJump) {
+        this.inJump = true;
+        this.groundLevel = 163;
+        this.jumpXvelocity = 0;
+      }
+
+      // Pit #2
+      if (this.x > 295 && this.x < 340 && this.y < 10 && !this.ladder && !this.inJump) {
+        this.inJump = true;
+        this.groundLevel = 163;
+        this.jumpXvelocity = 0;
+      }
+      // Climb pit 2
+      if (this.x > 295 && this.x < 340 && controls.isControlPressed("UP")) {
+        this.ladder = true;
+        this.y -= 10;
+        this.velocity = 0;
+        console.log("Ladder up");
+      }
+
+      // Pit #3
+      if (this.x > 460 && this.x < 525 && this.y < 10 && !this.ladder && !this.inJump) {
+        this.inJump = true;
+        this.groundLevel = 163;
+        this.jumpXvelocity = 0;
+      }
+
+
+    }
+
+    //===========================================
+    //    SCREEN SPECIFIC STUFF ENDS HERE
+    //===========================================
 
   }
 }

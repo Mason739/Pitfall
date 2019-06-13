@@ -146,21 +146,51 @@ let camera = {
     this.setFill(colors.under_path);
     this.drawBox(0, game.canvas.element.height * (13 / 15), game.canvas.element.width, game.canvas.element.height * (1 / 30));
 
-    this.drawTrunk(10);
-    this.drawTrunk(235);
-    this.drawTrunk(500);
-    this.drawTrunk(345);
-
-    // Draw the trees
-    this.drawTrees(10);
 
 
-    // Draw the ladder
-    this.drawLadder(250);
+    //===========================================
+    //    SCREEN SPECIFIC STUFF STARTS HERE
+    //===========================================
 
-    this.drawBricks(695);
+    if (player.screen == 1) {
+      this.drawTrunk(10);
+      this.drawTrunk(235);
+      this.drawTrunk(500);
+      this.drawTrunk(345);
 
-    this.drawLog(600);
+      // Draw the trees
+      this.drawTrees(10);
+
+
+      // Draw the ladder
+      this.drawLadder(250);
+
+      this.drawBricks(695);
+
+      this.drawLog(600);
+    } else if (player.screen == 2) {
+      this.drawTrunk(20);
+      this.drawTrunk(240);
+      this.drawTrunk(480);
+      this.drawTrunk(500);
+
+      // Draw the trees
+      this.drawTrees(25);
+
+      this.drawBricks(695);
+
+      // Draw the three pits
+      this.drawLadder(180, false);
+      this.drawLadder(350);
+      this.drawLadder(520, false);
+
+
+    }
+
+
+    //===========================================
+    //    SCREEN SPECIFIC STUFF ENDS HERE
+    //===========================================
 
     this.drawPlayer();
 
@@ -172,8 +202,7 @@ let camera = {
     var time = 1200 - Math.round((clock.now() - player.start)/1000);
     console.log();
 
-    game.canvas.ctx.fillText("{0}:{1}".format(Math.round(time/60) - 1, Number(time%60).toString().padStart(2, '0')), 150, 100);
-
+    game.canvas.ctx.fillText("{0}:{1}".format(Math.trunc(time/60) - 1, Number(time%60).toString().padStart(2, '0')), 150, 100);
 
     // If the game is paused, draw a 'misty' effect over the screen
     // TODO: Paused world be ligher or darker?
@@ -1194,7 +1223,7 @@ let camera = {
   /**
    * Draws a ladder and hole to access the underground
    */
-  drawLadder: function(location) {
+  drawLadder: function(location, ladder = true) {
     this.setStroke("rgba(1, 1, 1, 0)");
     const BOX_WIDTH = 60;
     const BOX_HEIGHT = 30;
@@ -1205,9 +1234,12 @@ let camera = {
     this.drawBox(location - (BOX_WIDTH / 2), game.canvas.element.height / 2 +  game.canvas.element.height / 8, BOX_WIDTH, game.canvas.element.height / 8 );
 
     this.setFill(colors.under_path);
-    for(var i = game.canvas.element.height / 2 +  game.canvas.element.height / 8 + 10; i < game.canvas.element.height * (13 / 15); i += 20) {
-      this.drawBox(location - (BOX_WIDTH / 2) + BOX_WIDTH / 4, i, BOX_WIDTH / 2, 7);
+    if (ladder) {
+      for(var i = game.canvas.element.height / 2 +  game.canvas.element.height / 8 + 10; i < game.canvas.element.height * (13 / 15); i += 20) {
+        this.drawBox(location - (BOX_WIDTH / 2) + BOX_WIDTH / 4, i, BOX_WIDTH / 2, 7);
+      }
     }
+
 
 
 
@@ -1258,7 +1290,6 @@ let camera = {
 
       }
 
-      console.log(img);
     } else if(controls.isControlPressed("MOVE_LEFT")) {
       var time  = clock.now() % 500;
       var img = null;
@@ -1282,7 +1313,6 @@ let camera = {
 
       }
 
-      console.log(img);
     } else {
       img = assets.images.idle;
     }

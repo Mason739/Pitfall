@@ -149,6 +149,11 @@ let camera = {
 
     this.drawPlayer();
 
+    // Draw scoreboard
+    this.setFill('#ffffff');
+    game.canvas.ctx.font = "60px Pixel";
+    game.canvas.ctx.fillText("1000", 100, 100);
+
 
     // If the game is paused, draw a 'misty' effect over the screen
     // TODO: Paused world be ligher or darker?

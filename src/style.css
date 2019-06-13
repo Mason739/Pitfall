@@ -5,3 +5,8 @@ canvas {
   width: 560px;
   height: 380px;
 }
+
+@font-face {
+  font-family: "Pixel";
+  src: url(/assets/pixel.ttf) format('truetype');
+}

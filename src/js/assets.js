@@ -11,6 +11,31 @@ let assetManager = {
     'trees': '/assets/trees.png',
     'trunk': '/assets/treetrunk.png',
     'brick': '/assets/bricks.png',
+    'log': '/assets/log.png',
+    'idle': '/assets/idle.png',
+
+    'runa': '/assets/runa.png',
+    'runb': '/assets/runb.png',
+    'runc': '/assets/runc.png',
+    'rund': '/assets/rund.png',
+    'rune': '/assets/rune.png',
+
+    'runaflip': '/assets/flipped/runa.png',
+    'runbflip': '/assets/flipped/runb.png',
+    'runcflip': '/assets/flipped/runc.png',
+    'rundflip': '/assets/flipped/rund.png',
+    'runeflip': '/assets/flipped/rune.png',
+
+    'jump': '/assets/jump.png',
+    'jumpflip': '/assets/flipped/jump.png',
+
+    'hurt': '/assets/hurt.png',
+
+    // 'runa': '/assets/tile000.png',
+    // 'runb': '/assets/tile001.png',
+    // 'runc': '/assets/tile002.png',
+    // 'rund': '/assets/tile003.png',
+    // 'rune': '/assets/tile004.png',
 
   },
 

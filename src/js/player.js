@@ -11,6 +11,9 @@ let player = {
    */
   y: 0,
 
+  start: clock.now(),
+
+
   /**
    * y velocity of the player
    * @note there is only a y velocity, so no need to specify
@@ -21,6 +24,10 @@ let player = {
   jumpXvelocity: 0,
 
   groundLevel: 0,
+
+  ladder: false,
+
+  score: 2000,
 
   /**
    * Is the player inside a jump (because they can't move when inside a jump)
@@ -53,21 +60,53 @@ let player = {
       this.inJump = true;
       this.velocity += 10;
     }
-    this.y -= this.velocity;
+
+    if(!this.ladder) {
+      this.y -= this.velocity;
+
+    }
 
     // TODO: This should be if(player.isTouchingGround)
     if (this.y < this.groundLevel) {
       this.velocity -= 0.5;
-    } else if (this.inJump){
+    } else {
       this.velocity = 0;
       this.inJump = false;
     }
 
     // TODO: This should be if (player.isTouchingHole)
-    if (this.x > 210 && this.x < 270 && this.y < 100) {
+    if (this.x > 210 && this.x < 270 && this.y < 10 && !this.ladder && !this.inJump) {
       this.inJump = true;
       this.groundLevel = 163;
       this.jumpXvelocity = 0;
+    }
+
+    // console.log(this.x);
+
+    if (this.x > 210 && this.x < 270 && controls.isControlPressed("UP")) {
+      this.ladder = true;
+      this.y -= 10;
+      this.velocity = 0;
+      console.log("Ladder up");
+    }
+
+    if (this.ladder && this.y < 0) {
+      this.velocity = -10;
+      this.groundLevel = 0;
+      this.inJump = true;
+      this.jumpXvelocity = 10;
+      this.ladder = false;
+    }
+
+    if (this.x > 700 && this.y > 30) {
+      this.x = 700;
+    }
+
+    if (this.x > 565 && this.x < 615 && this.y > -10) {
+      this.score -= 1;
+      this.log = true;
+    } else {
+      this.log = false;
     }
 
 

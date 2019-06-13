@@ -1,3 +1,16 @@
+if (!String.prototype.format) {
+  String.prototype.format = function() {
+    var args = arguments;
+    return this.replace(/{(\d+)}/g, function(match, number) {
+      return typeof args[number] != 'undefined'
+        ? args[number]
+        : match
+      ;
+    });
+  };
+}
+
+
 /**
  * The ideal height for the camera, it is adjusted to meet the player's screen
  *   dimentions
@@ -49,6 +62,7 @@ let camera = {
    */
   y: -10,
 
+
   /**
    * Sets the camera x position so that the given coordinate is in the center
    * @param  {Number} x x coordinate to set
@@ -95,6 +109,7 @@ let camera = {
    * @return {undefined} no return value
    */
   draw: function() {
+
 
     if(!game.started) {
       return;
@@ -143,9 +158,21 @@ let camera = {
     // Draw the ladder
     this.drawLadder(250);
 
-    this.drawBricks(800);
+    this.drawBricks(695);
+
+    this.drawLog(600);
 
     this.drawPlayer();
+
+    // Draw scoreboard
+    this.setFill('#ffffff');
+    game.canvas.ctx.font = "60px Pixel";
+    game.canvas.ctx.fillText(player.score, 150, 50);
+
+    var time = 1200 - Math.round((clock.now() - player.start)/1000);
+    console.log();
+
+    game.canvas.ctx.fillText("{0}:{1}".format(Math.round(time/60) - 1, Number(time%60).toString().padStart(2, '0')), 150, 100);
 
 
     // If the game is paused, draw a 'misty' effect over the screen
@@ -1199,8 +1226,78 @@ let camera = {
 
   drawPlayer: function() {
     this.setFill("#f58f79");
-    this.drawBox(player.x, player.y + game.canvas.element.height/2 - 32 , 10, 100);
-  }
+    // this.drawBox(player.x, player.y + game.canvas.element.height/2 - 32 , 10, 100);
+    if (player.log) {
+      img = assets.images.jump;
+    } else if (player.inJump) {
+      if (player.jumpXvelocity > 0) {
+        img = assets.images.jump;
+      } else {
+        img = assets.images.jumpflip;
+      }
+    } else if(controls.isControlPressed("MOVE_RIGHT")) {
+      var time  = clock.now() % 500;
+      var img = null;
+      if(time < 100) {
+        img = assets.images.runa;
+        // console.log();
+      } else if (time < 200) {
+        img = assets.images.runb;
+        // console.log('b');
+      } else if (time < 300) {
+        img = assets.images.runc;
+        // console.log('c');
+
+      } else if (time < 400) {
+        img = assets.images.rund;
+        // console.log('d');
+
+      } else {
+        img = assets.images.rune;
+        // console.log('e');
+
+      }
+
+      console.log(img);
+    } else if(controls.isControlPressed("MOVE_LEFT")) {
+      var time  = clock.now() % 500;
+      var img = null;
+      if(time < 100) {
+        img = assets.images.runaflip;
+        // console.log();
+      } else if (time < 200) {
+        img = assets.images.runbflip;
+        // console.log('b');
+      } else if (time < 300) {
+        img = assets.images.runcflip;
+        // console.log('c');
+
+      } else if (time < 400) {
+        img = assets.images.rundflip;
+        // console.log('d');
+
+      } else {
+        img = assets.images.runeflip;
+        // console.log('e');
+
+      }
+
+      console.log(img);
+    } else {
+      img = assets.images.idle;
+    }
+
+
+
+
+    this.drawImage(img, player.x, player.y + game.canvas.element.height/2 - 32 , 60, 100);
+
+  },
+
+  drawLog: function(location) {
+    this.drawImage(assets.images.log, location, 350, 50, 50);
+
+  },
 
 
 

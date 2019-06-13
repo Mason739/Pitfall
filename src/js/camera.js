@@ -1202,31 +1202,63 @@ let camera = {
   drawPlayer: function() {
     this.setFill("#f58f79");
     // this.drawBox(player.x, player.y + game.canvas.element.height/2 - 32 , 10, 100);
+    if (player.inJump) {
+      if (player.jumpXvelocity > 0) {
+        img = assets.images.jump;
+      } else {
+        img = assets.images.jumpflip;
+      }
+    } else if(controls.isControlPressed("MOVE_RIGHT")) {
+      var time  = clock.now() % 500;
+      var img = null;
+      if(time < 100) {
+        img = assets.images.runa;
+        // console.log();
+      } else if (time < 200) {
+        img = assets.images.runb;
+        // console.log('b');
+      } else if (time < 300) {
+        img = assets.images.runc;
+        // console.log('c');
 
-    var time  = clock.now() % 500;
-    var img = null;
-    if(time < 100) {
-      img = assets.images.runa;
-      // console.log();
-    } else if (time < 200) {
-      img = assets.images.runb;
-      // console.log('b');
-    } else if (time < 300) {
-      img = assets.images.runc;
-      // console.log('c');
+      } else if (time < 400) {
+        img = assets.images.rund;
+        // console.log('d');
 
-    } else if (time < 400) {
-      img = assets.images.rund;
-      // console.log('d');
+      } else {
+        img = assets.images.rune;
+        // console.log('e');
 
+      }
+
+      console.log(img);
+    } else if(controls.isControlPressed("MOVE_LEFT")) {
+      var time  = clock.now() % 500;
+      var img = null;
+      if(time < 100) {
+        img = assets.images.runaflip;
+        // console.log();
+      } else if (time < 200) {
+        img = assets.images.runbflip;
+        // console.log('b');
+      } else if (time < 300) {
+        img = assets.images.runcflip;
+        // console.log('c');
+
+      } else if (time < 400) {
+        img = assets.images.rundflip;
+        // console.log('d');
+
+      } else {
+        img = assets.images.runeflip;
+        // console.log('e');
+
+      }
+
+      console.log(img);
     } else {
-      img = assets.images.rune;
-      // console.log('e');
-
+      img = assets.images.idle;
     }
-
-    console.log(img);
-
 
 
 

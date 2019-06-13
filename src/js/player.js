@@ -33,7 +33,7 @@ let player = {
    * Stores which screen the player is on.
    * @type {Number}
    */
-  screen: 2,
+  screen: 3,
 
   /**
    * Is the player inside a jump (because they can't move when inside a jump)

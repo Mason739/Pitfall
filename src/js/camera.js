@@ -185,6 +185,16 @@ let camera = {
       this.drawLadder(520, false);
 
 
+    } else if (player.screen == 3) {
+      this.drawTrunk(10);
+      this.drawTrunk(235);
+      this.drawTrunk(500);
+      this.drawTrunk(345);
+
+      // Draw the trees
+      this.drawTrees(10);
+
+      this.drawPit();
     }
 
 
@@ -1318,9 +1328,11 @@ let camera = {
     }
 
 
+    var y_value = this.map(player.y, -50, 164, this.height / 2 - (this.height * (1/8)), this.height * (47/64))
 
-
-    this.drawImage(img, player.x, player.y + game.canvas.element.height/2 - 32 , 60, 100);
+    // this.renderImage(img, (player.x / 800) * this.width, this.map(player.y + this.height/2 - 300 , 250, 500);
+    this.renderImage(img, (player.x / 800) * this.width, y_value, 250, 500);
+    console.log(y_value);
 
   },
 
@@ -1328,6 +1340,10 @@ let camera = {
     this.drawImage(assets.images.log, location, 350, 50, 50);
 
   },
+
+  drawPit: function() {
+    this.renderImage(assets.images.pit, 1000, 1900, 2750 + 250, 200);
+  }
 
 
 

@@ -1332,7 +1332,7 @@ let camera = {
 
     // this.renderImage(img, (player.x / 800) * this.width, this.map(player.y + this.height/2 - 300 , 250, 500);
     this.renderImage(img, (player.x / 800) * this.width, y_value, 250, 500);
-    console.log(y_value);
+    // console.log(y_value);
 
   },
 

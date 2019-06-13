@@ -180,6 +180,18 @@ let player = {
       }
 
 
+    } else if (this.screen == 3) {
+      var pitl = 140;
+      var pitr = 610;
+      // MIDPOINT: 375
+      // LENGTH:   235
+
+      if (this.x > pitl && this.x < pitr && this.y > -10) {
+        this.x = 30;
+        this.y = -200
+        this.inJump = true;
+        this.jumpXvelocity = 0;
+      }
     }
 
     //===========================================

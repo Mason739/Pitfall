@@ -11,6 +11,9 @@ let player = {
    */
   y: 0,
 
+  start: clock.now(),
+
+
   /**
    * y velocity of the player
    * @note there is only a y velocity, so no need to specify

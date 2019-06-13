@@ -1,3 +1,16 @@
+if (!String.prototype.format) {
+  String.prototype.format = function() {
+    var args = arguments;
+    return this.replace(/{(\d+)}/g, function(match, number) {
+      return typeof args[number] != 'undefined'
+        ? args[number]
+        : match
+      ;
+    });
+  };
+}
+
+
 /**
  * The ideal height for the camera, it is adjusted to meet the player's screen
  *   dimentions
@@ -49,6 +62,7 @@ let camera = {
    */
   y: -10,
 
+
   /**
    * Sets the camera x position so that the given coordinate is in the center
    * @param  {Number} x x coordinate to set
@@ -95,6 +109,7 @@ let camera = {
    * @return {undefined} no return value
    */
   draw: function() {
+
 
     if(!game.started) {
       return;
@@ -153,6 +168,11 @@ let camera = {
     this.setFill('#ffffff');
     game.canvas.ctx.font = "60px Pixel";
     game.canvas.ctx.fillText(player.score, 150, 50);
+
+    var time = 1200 - Math.round((clock.now() - player.start)/1000);
+    console.log();
+
+    game.canvas.ctx.fillText("{0}:{1}".format(Math.round(time/60) - 1, Number(time%60).toString().padStart(2, '0')), 150, 100);
 
 
     // If the game is paused, draw a 'misty' effect over the screen

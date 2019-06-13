@@ -29,6 +29,8 @@ let assetManager = {
     'jump': '/assets/jump.png',
     'jumpflip': '/assets/flipped/jump.png',
 
+    'hurt': '/assets/hurt.png',
+
     // 'runa': '/assets/tile000.png',
     // 'runb': '/assets/tile001.png',
     // 'runc': '/assets/tile002.png',

@@ -152,7 +152,7 @@ let camera = {
     // Draw scoreboard
     this.setFill('#ffffff');
     game.canvas.ctx.font = "60px Pixel";
-    game.canvas.ctx.fillText("1000", 100, 100);
+    game.canvas.ctx.fillText(player.score, 150, 50);
 
 
     // If the game is paused, draw a 'misty' effect over the screen
@@ -1207,7 +1207,9 @@ let camera = {
   drawPlayer: function() {
     this.setFill("#f58f79");
     // this.drawBox(player.x, player.y + game.canvas.element.height/2 - 32 , 10, 100);
-    if (player.inJump) {
+    if (player.log) {
+      img = assets.images.jump;
+    } else if (player.inJump) {
       if (player.jumpXvelocity > 0) {
         img = assets.images.jump;
       } else {

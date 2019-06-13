@@ -24,6 +24,8 @@ let player = {
 
   ladder: false,
 
+  score: 2000,
+
   /**
    * Is the player inside a jump (because they can't move when inside a jump)
    * @type {Boolean}
@@ -95,6 +97,13 @@ let player = {
 
     if (this.x > 700 && this.y > 30) {
       this.x = 700;
+    }
+
+    if (this.x > 565 && this.x < 615 && this.y > -10) {
+      this.score -= 1;
+      this.log = true;
+    } else {
+      this.log = false;
     }
 
 

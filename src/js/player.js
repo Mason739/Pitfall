@@ -186,6 +186,30 @@ let player = {
       // MIDPOINT: 375
       // LENGTH:   235
 
+      // Moving pit
+
+      var time = clock.now() % 10000;
+
+      if (time < 5000) {
+        // Because nothing is greater than 0 and less than -10
+        pitl = 0;
+        pitr = -10;
+
+      } else if (time < 7500) {
+        var percent = (time - 5000) / 2500;
+
+        pitl = camera.map(percent, 1, 0, 140, 375);
+        pitr = camera.map(percent, 1, 0, 610, 375);
+
+
+      } else {
+        var percent = (time - 7500) / 2500;
+
+        pitl = camera.map(percent, 0, 1, 140, 375);
+        pitr = camera.map(percent, 0, 1, 610, 375);
+
+      }
+
       if (this.x > pitl && this.x < pitr && this.y > -10) {
         this.x = 30;
         this.y = -200

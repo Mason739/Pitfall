@@ -1342,7 +1342,27 @@ let camera = {
   },
 
   drawPit: function() {
-    this.renderImage(assets.images.pit, 1000, 1900, 2750 + 250, 200);
+    // 0 -> 5000 (gone)
+    // 5000 -> 7500 (opening)
+    // 7500 -> 10000 (closing)
+
+    var time = clock.now() % 10000;
+
+    if (time < 5000) {
+
+    } else if (time < 7500) {
+      var percent = (time - 5000) / 2500;
+
+      this.renderImage(assets.images.pit, this.map(percent, 1, 0 , 250 + 250 /2, 250 + 250 /2 +  (2500/2)), 1900, this.map(percent, 1, 0, 2500, 0), 200);
+
+
+    } else {
+      var percent = (time - 7500) / 2500;
+
+      this.renderImage(assets.images.pit, this.map(percent, 0, 1 , 250 + 250 /2, 250 + 250 /2 +  (2500/2)), 1900, this.map(percent, 0, 1, 2500, 0), 200);
+
+    }
+    console.log(time);
   }
 
 
